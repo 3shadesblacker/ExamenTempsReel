@@ -55,7 +55,6 @@ if __name__ == '__main__':
     while(True):
         for i in task_list:
             if (i.period >= i.execution_time):
-                print("loop")
                 if i.name == "Pump 1" and (tank + 10) <= 50:
                     i.run()
                     tank += 10
@@ -66,10 +65,9 @@ if __name__ == '__main__':
                     i.run()
                     motors += 1
                     tank -= 25
-                elif i.name == "Machine 2" and tank >= 5 and (motors == 0 or wheels/motors <= 4):
-                    while (True):
-                        i.run()
-                        wheels += 1
-                        tank -= 5
-                        if (tank == 0 or wheels % 4 == 0):
-                            break
+                elif i.name == "Machine 2" and tank >= 5 and (motors == 0 or wheels/motors < 4):
+                    for j in range(0, 4):
+                        if (tank > 0 and wheels / 4 != 0):
+                            i.run()
+                            wheels += 1
+                            tank -= 5
